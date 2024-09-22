@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customers - CRM Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      id="themeStylesheet"
+      rel="stylesheet"
+      href="home-admin/default-theme.css"
+    />
+    <script src="home-admin/script.js"></script>
+  </head>
+  <body>
+    <div class="flex h-screen">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-gray-900 text-gray-200 flex flex-col">
+        <div class="h-16 flex items-center justify-center font-bold text-xl">
+          CRM Dashboard
+        </div>
+        <nav class="flex-1 px-4 py-6">
+          <ul class="space-y-4">
+            <li>
+              <a
+                href="/home-admin/index.html"
+                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
+                >Dashboard</a
+              >
+            </li>
+            <li>
+              <a
+                href="/customer/index.html"
+                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
+                >Customers</a
+              >
+            </li>
+            <li>
+              <a
+                href="items/index.html"
+                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
+                >Items</a
+              >
+            </li>
+            <li>
+              <a
+                href="/transactions/index.html"
+                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
+                >Transactions Log</a
+              >
+            </li>
+            <li>
+              <a
+                href="/reports/index.html"
+                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
+                >Reports</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="flex-1 flex flex-col">
+        <header class="bg-white shadow py-4 px-6">
+          <h1 class="text-2xl font-semibold text-gray-800">Customers</h1>
+        </header>
+        <main class="p-6 bg-gray-100 flex-1">
+          <!-- Content for customers -->
+          <div class="bg-white p-6 shadow-lg rounded-lg">
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-xl font-semibold">Customer List</h2>
+              <button
+                class="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                onclick="toggleModal('addModal')"
+              >
+                Add New
+              </button>
+            </div>
+
+            <table class="min-w-full bg-white shadow-lg rounded-lg">
+              <thead>
+                <tr>
+                  <th class="px-4 py-2 text-left text-gray-600">Name</th>
+                  <th class="px-4 py-2 text-left text-gray-600">Email</th>
+                  <th class="px-4 py-2 text-left text-gray-600">Phone</th>
+                  <th class="px-4 py-2 text-left text-gray-600">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-t">
+                  <td class="px-4 py-2">John Doe</td>
+                  <td class="px-4 py-2">john@example.com</td>
+                  <td class="px-4 py-2">555-1234</td>
+                  <td class="px-4 py-2">
+                    <a href="#view" class="text-blue-500 hover:underline"
+                      >View</a
+                    >
+                    <a href="#edit" class="text-green-500 hover:underline ml-4"
+                      >Edit</a
+                    >
+                  </td>
+                </tr>
+                <!-- More customers can be added here -->
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      id="addModal"
+      class="fixed z-50 inset-0 hidden bg-gray-800 bg-opacity-50 flex items-center justify-center"
+    >
+      <div class="bg-white p-6 rounded-lg w-full max-w-4xl">
+        <h3 class="text-lg font-semibold mb-4">Add New Customer</h3>
+        <form action="#">
+          <!-- Example fields (to be replaced with Frappe fields) -->
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="block mb-2">First Name</label>
+              <input type="text" class="w-full p-2 border rounded" />
+            </div>
+            <div>
+              <label class="block mb-2">Last Name</label>
+              <input type="text" class="w-full p-2 border rounded" />
+            </div>
+            <div>
+              <label class="block mb-2">Email</label>
+              <input type="email" class="w-full p-2 border rounded" />
+            </div>
+            <div>
+              <label class="block mb-2">Phone</label>
+              <input type="tel" class="w-full p-2 border rounded" />
+            </div>
+          </div>
+
+          <!-- Save/Cancel buttons -->
+          <div class="flex justify-end mt-4">
+            <button
+              type="button"
+              class="bg-gray-500 text-white px-4 py-2 rounded-lg mr-2"
+              onclick="toggleModal('addModal')"
+            >
+              Cancel
+            </button>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg">
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function toggleModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.toggle("hidden");
+      }
+    </script>
+  </body>
+</html>

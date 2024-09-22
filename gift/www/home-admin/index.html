@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRM Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      id="themeStylesheet"
+      rel="stylesheet"
+      href="home-admin/default-theme.css"
+    />
+    <script src="home-admin/script.js"></script>
+    <style>
+      /* Snowflake Styles */
+      .snowflake {
+        position: fixed;
+        top: -10px;
+        color: white;
+        pointer-events: none;
+        opacity: 0.8;
+        animation: fall linear infinite;
+      }
+
+      @keyframes fall {
+        to {
+          transform: translateY(100vh);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="flex h-screen">
+      <aside class="w-64 bg-gray-900 text-gray-200 flex flex-col">
+        <div class="h-16 flex items-center justify-center font-bold text-xl">
+          CRM Dashboard
+        </div>
+
+        <nav class="flex-1 px-4 py-6">
+          <ul class="space-y-4">
+            <li>
+              <a
+                href="#dashboard"
+                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
+              >
+                <!-- <span class="material-icons">dashboard</span> -->
+                <span class="ml-3">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/customers/index.html"
+                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
+              >
+                <!-- <span class="material-icons">people</span> -->
+                <span class="ml-3">Customers</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/items/index.html"
+                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
+              >
+                <!-- <span class="material-icons">inventory</span> -->
+                <span class="ml-3">Items</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/transaction/index.html"
+                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
+              >
+                <!-- <span class="material-icons">receipt_long</span> -->
+                <span class="ml-3">Transactions Log</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/reports/index.html"
+                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
+              >
+                <!-- <span class="material-icons">report</span> -->
+                <span class="ml-3">Reports</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <audio
+          id="snowfall-sound"
+          src="/files/enchanted-chimes-177906.mp3"
+          loop
+          muted
+        ></audio>
+        <button
+          id="sound-toggle"
+          class="bg-gray-100 text-gray-600 p-2 rounded-lg"
+        >
+          <span id="sound-icon">🔊</span>
+          <!-- Default icon for sound on -->
+        </button>
+      </aside>
+
+      <!-- Main Content Area -->
+      <div class="flex-1 flex flex-col">
+        <!-- Header -->
+        <header class="bg-white shadow py-4 px-6">
+          <div class="flex justify-between items-center">
+            <h1 class="text-2xl font-semibold text-gray-800">Dashboard</h1>
+            <div class="flex items-center space-x-4">
+              <!-- Dropdown for Notifications -->
+              <div class="relative">
+                <button
+                  class="bg-gray-100 text-gray-600 px-4 py-2 rounded-lg"
+                  onclick="toggleDropdown()"
+                >
+                  Notifications
+                </button>
+                <div
+                  id="dropdownMenu"
+                  class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden"
+                >
+                  <ul class="py-1">
+                    <li>
+                      <a
+                        href="#"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
+                        >Notification 1</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
+                        >Notification 2</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Button to Trigger Add Modal -->
+              <button
+                class="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                onclick="toggleModal('addModal')"
+              >
+                Add New
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <main class="p-6 bg-gray-100 flex-1">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Card 1: Total Customers -->
+            <div class="bg-white shadow-lg rounded-lg p-6">
+              <h2 class="text-lg font-semibold text-gray-800">
+                Total Customers
+              </h2>
+              <p class="text-3xl font-bold text-blue-500 mt-4">1,245</p>
+            </div>
+
+            <!-- Card 2: Total Transactions -->
+            <div class="bg-white shadow-lg rounded-lg p-6">
+              <h2 class="text-lg font-semibold text-gray-800">
+                Total Transactions
+              </h2>
+              <p class="text-3xl font-bold text-green-500 mt-4">$34,600</p>
+            </div>
+
+            <!-- Card 3: Total Items -->
+            <div class="bg-white shadow-lg rounded-lg p-6">
+              <h2 class="text-lg font-semibold text-gray-800">Total Items</h2>
+              <p class="text-3xl font-bold text-red-500 mt-4">789</p>
+            </div>
+          </div>
+
+          <!-- Table: Recent Transactions -->
+          <div class="mt-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">
+              Recent Transactions
+            </h2>
+            <table class="min-w-full bg-white shadow-lg rounded-lg">
+              <thead>
+                <tr>
+                  <th class="px-4 py-2 text-left text-gray-600">
+                    Customer Name
+                  </th>
+                  <th class="px-4 py-2 text-left text-gray-600">Item</th>
+                  <th class="px-4 py-2 text-left text-gray-600">Date</th>
+                  <th class="px-4 py-2 text-left text-gray-600">Amount</th>
+                  <th class="px-4 py-2 text-left text-gray-600">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-t">
+                  <td class="px-4 py-2">John Doe</td>
+                  <td class="px-4 py-2">Gift Card</td>
+                  <td class="px-4 py-2">Sept 19, 2024</td>
+                  <td class="px-4 py-2">$50</td>
+                  <td class="px-4 py-2">
+                    <a
+                      href="#view"
+                      class="text-blue-500 hover:underline"
+                      onclick="toggleModal('viewModal')"
+                      >View</a
+                    >
+                    <a
+                      href="#edit"
+                      class="text-green-500 hover:underline ml-4"
+                      onclick="toggleModal('editModal')"
+                      >Edit</a
+                    >
+                  </td>
+                </tr>
+                <tr class="border-t">
+                  <td class="px-4 py-2">Jane Smith</td>
+                  <td class="px-4 py-2">Custom Mug</td>
+                  <td class="px-4 py-2">Sept 18, 2024</td>
+                  <td class="px-4 py-2">$25</td>
+                  <td class="px-4 py-2">
+                    <a
+                      href="#view"
+                      class="text-blue-500 hover:underline"
+                      onclick="toggleModal('viewModal')"
+                      >View</a
+                    >
+                    <a
+                      href="#edit"
+                      class="text-green-500 hover:underline ml-4"
+                      onclick="toggleModal('editModal')"
+                      >Edit</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Modal: Add New Item -->
+    <div
+      id="addModal"
+      class="fixed z-50 inset-0 hidden bg-gray-800 bg-opacity-50 flex items-center justify-center"
+    >
+      <div class="bg-white p-6 rounded-lg w-96">
+        <h3 class="text-lg font-semibold mb-4">Add New Item</h3>
+        <form action="#">
+          <label class="block mb-2">Item Name</label>
+          <input type="text" class="w-full p-2 border rounded mb-4" />
+          <label class="block mb-2">Price</label>
+          <input type="number" class="w-full p-2 border rounded mb-4" />
+          <div class="flex justify-end space-x-4">
+            <button
+              type="button"
+              class="bg-gray-300 px-4 py-2 rounded-lg"
+              onclick="toggleModal('addModal')"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal: View Item Details -->
+    <div
+      id="viewModal"
+      class="fixed z-50 inset-0 hidden bg-gray-800 bg-opacity-50 flex items-center justify-center"
+    >
+      <div class="bg-white p-6 rounded-lg w-96">
+        <h3 class="text-lg font-semibold mb-4">Item Details</h3>
+        <p class="text-gray-700">Name: Gift Card</p>
+        <p class="text-gray-700">Price: $50</p>
+        <p class="text-gray-700">Date: Sept 19, 2024</p>
+        <div class="flex justify-end mt-4">
+          <button
+            class="bg-gray-300 px-4 py-2 rounded-lg"
+            onclick="toggleModal('viewModal')"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Edit Item -->
+    <div
+      id="editModal"
+      class="fixed z-50 inset-0 hidden bg-gray-800 bg-opacity-50 flex items-center justify-center"
+    >
+      <div class="bg-white p-6 rounded-lg w-96">
+        <h3 class="text-lg font-semibold mb-4">Edit Item</h3>
+        <form action="#">
+          <label class="block mb-2">Item Name</label>
+          <input
+            type="text"
+            class="w-full p-2 border rounded mb-4"
+            value="Gift Card"
+          />
+          <label class="block mb-2">Price</label>
+          <input
+            type="number"
+            class="w-full p-2 border rounded mb-4"
+            value="50"
+          />
+          <div class="flex justify-end space-x-4">
+            <button
+              type="button"
+              class="bg-gray-300 px-4 py-2 rounded-lg"
+              onclick="toggleModal('editModal')"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg"
+            >
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

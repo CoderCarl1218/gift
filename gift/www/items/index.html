@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Items - CRM Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      id="themeStylesheet"
+      rel="stylesheet"
+      href="home-admin/default-theme.css"
+    />
+    <script src="home-admin/script.js"></script>
+  </head>
+  <body>
+    <div class="flex h-screen">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-gray-900 text-gray-200 flex flex-col">
+        <div class="h-16 flex items-center justify-center font-bold text-xl">
+          CRM Dashboard
+        </div>
+        <nav class="flex-1 px-4 py-6">
+          <ul class="space-y-4">
+            <li>
+              <a
+                href="/home-admin/index.html"
+                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
+                >Dashboard</a
+              >
+            </li>
+            <li>
+              <a
+                href="/customers/index.html"
+                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
+                >Customers</a
+              >
+            </li>
+            <li>
+              <a
+                href="items/index.html"
+                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
+                >Items</a
+              >
+            </li>
+            <li>
+              <a
+                href="/transaction/index.html"
+                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
+                >Transactions Log</a
+              >
+            </li>
+            <li>
+              <a
+                href="/reports/index.html"
+                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
+                >Reports</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="flex-1 flex flex-col">
+        <header class="bg-white shadow py-4 px-6">
+          <h1 class="text-2xl font-semibold text-gray-800">Items</h1>
+        </header>
+        <main class="p-6 bg-gray-100 flex-1">
+          <!-- Content for items -->
+          <div class="bg-white p-6 shadow-lg rounded-lg">
+            <h2 class="text-xl font-semibold mb-4">Item List</h2>
+            <table class="min-w-full bg-white shadow-lg rounded-lg">
+              <thead>
+                <tr>
+                  <th class="px-4 py-2 text-left text-gray-600">Item Name</th>
+                  <th class="px-4 py-2 text-left text-gray-600">Price</th>
+                  <th class="px-4 py-2 text-left text-gray-600">Stock</th>
+                  <th class="px-4 py-2 text-left text-gray-600">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-t">
+                  <td class="px-4 py-2">Custom Mug</td>
+                  <td class="px-4 py-2">$15</td>
+                  <td class="px-4 py-2">45</td>
+                  <td class="px-4 py-2">
+                    <a href="#view" class="text-blue-500 hover:underline"
+                      >View</a
+                    >
+                    <a href="#edit" class="text-green-500 hover:underline ml-4"
+                      >Edit</a
+                    >
+                  </td>
+                </tr>
+                <!-- More items -->
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

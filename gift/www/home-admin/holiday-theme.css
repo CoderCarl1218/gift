@@ -1,0 +1,21 @@
+/* Holiday Theme CSS */
+body {
+  background-image: url("https://th.bing.com/th/id/OIP.jYrbHc1FkJW1Ves1eBRoKwHaFj?rs=1&pid=ImgDetMain");
+  background-size: cover;
+  background-position: center; /* Centers the image */
+  color: #fff; /* Text color for contrast */
+  background-color: transparent; /* Ensure the image shows */
+}
+
+header {
+  background-color: #e53e3e; /* Red header */
+  color: white;
+}
+
+aside {
+  background-color: #be4d19; /* Dark sidebar */
+}
+
+a:hover {
+  background-color: #c53030; /* Red hover effect */
+}
