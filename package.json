@@ -1,0 +1,17 @@
+{
+  "name": "gift",
+  "version": "1.0.0",
+  "description": "Customized CRM System for Gift Management",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i ./gift/templates/tailwind.css -o ./gift/public/css/styles.css",
+    "watch": "tailwindcss -i ./gift/templates/tailwind.css -o ./gift/public/css/styles.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.12"
+  }
+}

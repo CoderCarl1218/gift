@@ -1,0 +1,28 @@
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Updated font */
+  background-color: #f7f9fc; /* Light background color */
+}
+
+.sidebar {
+  transition: width 0.2s; /* Smooth sidebar transition */
+}
+
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px; /* More padding for links */
+    border-radius: 8px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth hover effect */
+  }
+
+.nav-link:hover {
+  background-color: rgba(189, 30, 30, 0.1); /* Light hover effect */
+}
+
+
+
+
+
+

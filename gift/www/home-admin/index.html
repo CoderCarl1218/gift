@@ -1,171 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CRM Dashboard</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      id="themeStylesheet"
-      rel="stylesheet"
-      href="home-admin/default-theme.css"
-    />
-    <script src="home-admin/script.js"></script>
-    <style>
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Updated font */
-        background-color: #f7f9fc; /* Light background color */
-      }
+{%extends "templates/base_layout.html"%}
+{%block title%} Home {%endblock%}
 
-      .sidebar {
-        transition: width 0.2s; /* Smooth sidebar transition */
-      }
-
-      header {
-        background-color: #ffffff; /* Header background */
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-      }
-
-      .nav-link {
-        display: flex;
-        align-items: center;
-        padding: 12px 16px; /* More padding for links */
-        border-radius: 8px; /* Rounded corners */
-        transition: background-color 0.3s; /* Smooth hover effect */
-      }
-
-      .nav-link:hover {
-        background-color: rgba(7, 12, 162, 0.1); /* Light hover effect */
-      }
-
-      .card {
-        transition: transform 0.2s; /* Smooth card effect */
-        position: relative; /* For positioning badge */
-      }
-
-      .card:hover {
-        transform: scale(1.02); /* Slight zoom effect on hover */
-      }
-
-      .badge {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: #ff4757; /* Red badge */
-        color: white;
-        padding: 5px 10px;
-        border-radius: 12px;
-        font-size: 0.8rem;
-      }
-
-      table th {
-        background-color: #f1f5f9; /* Light gray for table headers */
-      }
-
-      .table-row {
-        transition: background-color 0.3s; /* Smooth row hover effect */
-      }
-
-      .table-row:hover {
-        background-color: #f9fafb; /* Light hover effect for table rows */
-      }
-
-      button {
-        transition: background-color 0.3s, transform 0.2s; /* Smooth button effect */
-      }
-
-      button:hover {
-        background-color: #0056b3; /* Darker blue on hover */
-        transform: translateY(-2px); /* Lift effect */
-      }
-
-      input,
-      select {
-        border-radius: 4px; /* Rounded input fields */
-        transition: border 0.3s; /* Smooth border effect */
-      }
-
-      input:focus,
-      select:focus {
-        border: 2px solid #007bff; /* Focus border */
-        outline: none; /* Remove default outline */
-      }
-    </style>
-  </head>
-  <body>
+{%block content%} 
     <!-- Sidebar -->
     <div class="flex h-screen">
-      <aside class="w-64 bg-gray-900 text-gray-200 flex flex-col">
-        <div class="h-16 flex items-center justify-center font-bold text-xl">
-          CRM Dashboard
-        </div>
-        <nav class="flex-1 px-4 py-6">
-          <ul class="space-y-4">
-            <li>
-              <a href="#dashboard" class="nav-link">
-                <i class="fas fa-tachometer-alt"></i>
-                <span class="ml-3">Dashboard</span>
-              </a>
-            </li>
-            <li>
-              <a href="/customers/index.html" class="nav-link">
-                <i class="fas fa-users"></i>
-                <span class="ml-3">Customers</span>
-              </a>
-            </li>
-            <li>
-              <a href="/items/index.html" class="nav-link">
-                <i class="fas fa-box"></i>
-                <span class="ml-3">Items</span>
-              </a>
-            </li>
-            <li>
-              <a href="/transaction/index.html" class="nav-link">
-                <i class="fas fa-receipt"></i>
-                <span class="ml-3">Transactions Log</span>
-              </a>
-            </li>
-            <li>
-              <a href="/reports/index.html" class="nav-link">
-                <i class="fas fa-chart-line"></i>
-                <span class="ml-3">Reports</span>
-              </a>
-            </li>
-            <li>
-              <a href="/card-template" class="nav-link">
-                <i class="fas fa-envelope"></i>
-                <span class="ml-3">Send Template</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <audio
-          id="snowfall-sound"
-          src="/files/enchanted-chimes-177906.mp3"
-          loop
-          muted
-        ></audio>
-        <button
-          id="sound-toggle"
-          class="bg-gray-100 text-gray-600 p-2 rounded-lg"
-        >
-          <span id="sound-icon">🔊</span>
-        </button>
-      </aside>
-
+      {% include "templates/includes/sidebar.html" %}
       <!-- Main Content Area -->
       <div class="flex-1 flex flex-col">
         <!-- Header -->
         <header class="py-4 px-6">
           <div class="flex justify-between items-center">
             <h1 class="text-2xl font-semibold text-gray-800">Dashboard</h1>
+            
             <div class="flex items-center space-x-4">
               <button
-                class="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                class="bg-blue-500 text-gray px-4 py-2 rounded-lg"
                 onclick="toggleModal('addModal')"
               >
                 Add New
@@ -173,77 +22,53 @@
             </div>
           </div>
         </header>
-
-        <!-- Dashboard Content -->
-        <!-- Dashboard Content -->
         <main class="p-6 bg-gray-100 flex-1">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <!-- Card 1: Total Customers -->
-            <div class="card bg-white shadow-lg rounded-lg p-6">
+            <div class="card bg-white shadow-lg rounded-lg p-6 relative">
               <span class="badge">New</span>
-              <h2 class="text-lg font-semibold text-gray-800">
-                Total Customers
-              </h2>
+              <h2 class="text-lg font-semibold text-gray-800">Total Customers</h2>
               <p class="text-3xl font-bold text-blue-500 mt-4">1,245</p>
-              <i
-                class="fas fa-users fa-2x text-blue-500 absolute bottom-4 right-4"
-              ></i>
+              <i class="fas fa-users fa-2x text-blue-500 absolute bottom-4 right-4"></i>
             </div>
-
+          
             <!-- Card 2: Total Transactions -->
-            <div class="card bg-white shadow-lg rounded-lg p-6">
+            <div class="card bg-white shadow-lg rounded-lg p-6 relative">
               <span class="badge">Updated</span>
-              <h2 class="text-lg font-semibold text-gray-800">
-                Total Transactions
-              </h2>
+              <h2 class="text-lg font-semibold text-gray-800">Total Transactions</h2>
               <p class="text-3xl font-bold text-green-500 mt-4">$34,600</p>
-              <i
-                class="fas fa-receipt fa-2x text-green-500 absolute bottom-4 right-4"
-              ></i>
+              <i class="fas fa-receipt fa-2x text-green-500 absolute bottom-4 right-4"></i>
             </div>
-
+          
             <!-- Card 3: Total Items -->
-            <div class="card bg-white shadow-lg rounded-lg p-6">
+            <div class="card bg-white shadow-lg rounded-lg p-6 relative">
               <h2 class="text-lg font-semibold text-gray-800">Total Items</h2>
               <p class="text-3xl font-bold text-red-500 mt-4">789</p>
-              <i
-                class="fas fa-box fa-2x text-red-500 absolute bottom-4 right-4"
-              ></i>
+              <i class="fas fa-box fa-2x text-red-500 absolute bottom-4 right-4"></i>
             </div>
-
+          
             <!-- Card 4: Customer Satisfaction -->
-            <div class="card bg-white shadow-lg rounded-lg p-6">
-              <h2 class="text-lg font-semibold text-gray-800">
-                Customer Satisfaction
-              </h2>
+            <div class="card bg-white shadow-lg rounded-lg p-6 relative">
+              <h2 class="text-lg font-semibold text-gray-800">Customer Satisfaction</h2>
               <p class="text-3xl font-bold text-yellow-500 mt-4">92%</p>
-              <i
-                class="fas fa-smile fa-2x text-yellow-500 absolute bottom-4 right-4"
-              ></i>
+              <i class="fas fa-smile fa-2x text-yellow-500 absolute bottom-4 right-4"></i>
             </div>
-
+          
             <!-- Card 5: Monthly Revenue -->
-            <div class="card bg-white shadow-lg rounded-lg p-6">
-              <h2 class="text-lg font-semibold text-gray-800">
-                Monthly Revenue
-              </h2>
+            <div class="card bg-white shadow-lg rounded-lg p-6 relative">
+              <h2 class="text-lg font-semibold text-gray-800">Monthly Revenue</h2>
               <p class="text-3xl font-bold text-purple-500 mt-4">$12,345</p>
-              <i
-                class="fas fa-dollar-sign fa-2x text-purple-500 absolute bottom-4 right-4"
-              ></i>
+              <i class="fas fa-dollar-sign fa-2x text-purple-500 absolute bottom-4 right-4"></i>
             </div>
-
+          
             <!-- Card 6: Active Promotions -->
-            <div class="card bg-white shadow-lg rounded-lg p-6">
-              <h2 class="text-lg font-semibold text-gray-800">
-                Active Promotions
-              </h2>
+            <div class="card bg-white shadow-lg rounded-lg p-6 relative">
+              <h2 class="text-lg font-semibold text-gray-800">Active Promotions</h2>
               <p class="text-3xl font-bold text-orange-500 mt-4">5</p>
-              <i
-                class="fas fa-tags fa-2x text-orange-500 absolute bottom-4 right-4"
-              ></i>
+              <i class="fas fa-tags fa-2x text-orange-500 absolute bottom-4 right-4"></i>
             </div>
           </div>
+          
 
           <!-- Table: Recent Transactions -->
           <div class="mt-8">
@@ -299,27 +124,151 @@
         </form>
       </div>
     </div>
-
-    <script>
-      const soundToggle = document.getElementById("sound-toggle");
-      const soundIcon = document.getElementById("sound-icon");
-      const snowfallSound = document.getElementById("snowfall-sound");
-
-      soundToggle.addEventListener("click", () => {
-        if (snowfallSound.muted) {
-          snowfallSound.muted = false;
-          soundIcon.textContent = "🔊"; // Unmute icon
-        } else {
-          snowfallSound.muted = true;
-          soundIcon.textContent = "🔇"; // Mute icon
-        }
-      });
-
-      // Function to toggle modals
-      function toggleModal(modalId) {
-        const modal = document.getElementById(modalId);
-        modal.classList.toggle("hidden");
+{%endblock%}
+{% block styles %}
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f7f9fc;
       }
-    </script>
-  </body>
-</html>
+      .sidebar {
+        transition: width 0.2s;
+      }
+      header {
+        background-color: #ffffff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .nav-link {
+        display: flex;
+        align-items: center;
+        padding: 12px 16px;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+      }
+      .nav-link:hover {
+        background-color: rgba(7, 12, 162, 0.1);
+      }
+      .card {
+        transition: transform 0.2s;
+        position: relative;
+      }
+      .card:hover {
+        transform: scale(1.02);
+      }
+      .badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #ff4757;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+      }
+      table th {
+        background-color: #f1f5f9;
+      }
+      .table-row {
+        transition: background-color 0.3s;
+      }
+      .table-row:hover {
+        background-color: #f9fafb;
+      }
+      button {
+        transition: background-color 0.3s, transform 0.2s;
+      }
+      button:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+      }
+      input, select {
+        border-radius: 4px;
+        transition: border 0.3s;
+      }
+      input:focus, select:focus {
+        border: 2px solid #007bff;
+        outline: none;
+      }
+    </style>
+{% endblock %}
+
+<script>
+    
+document.addEventListener("DOMContentLoaded", function () {
+  const currentDate = new Date();
+  const month = currentDate.getMonth(); // 0-11 (0 = January, 11 = December)
+  const snowfallSound = document.getElementById('snowfall-sound');
+  
+  // Start with muted sound
+  snowfallSound.muted = true;
+
+  // Function to toggle sound
+  function toggleSound() {
+      snowfallSound.muted = !snowfallSound.muted; // Toggle mute
+      const soundIcon = document.getElementById('sound-icon');
+      soundIcon.textContent = snowfallSound.muted ? '🔇' : '🔊'; // Change icon based on mute state
+  }
+
+  // Add event listener to the sound toggle button
+  document.getElementById('sound-toggle').addEventListener('click', toggleSound);
+
+  // Play sound and start snowfall automatically in December
+  if (month === 11) { // If it's December
+      snowfallSound.muted = false; // Unmute
+      snowfallSound.loop = true; // Loop the sound
+      snowfallSound.play(); // Play snowfall sound
+      createSnowfall(); // Start the snowfall effect
+  }
+
+  function createSnowfall() {
+      const snowflakesCount = 50; // Number of snowflakes
+      const snowflakeContainer = document.createElement('div');
+      snowflakeContainer.classList.add('snowflake-container');
+      document.body.appendChild(snowflakeContainer);
+  
+      // Array of emoticons to use
+      const emoticons = ['❄️', '☃️', '🎅', '🎄'];
+  
+      for (let i = 0; i < snowflakesCount; i++) {
+          const snowflake = document.createElement('div');
+          snowflake.classList.add('snowflake');
+  
+          // Randomly select an emoticon
+          const randomEmoticon = emoticons[Math.floor(Math.random() * emoticons.length)];
+          snowflake.innerHTML = randomEmoticon;
+  
+          snowflakeContainer.appendChild(snowflake);
+          animateSnowflake(snowflake);
+      }
+  }
+
+  function animateSnowflake(snowflake) {
+      snowflake.style.position = 'absolute';
+      snowflake.style.top = '-10px'; // Start above the viewport
+      snowflake.style.left = Math.random() * window.innerWidth + 'px'; // Random horizontal position
+      snowflake.style.opacity = Math.random(); // Random opacity
+
+      const fallDuration = Math.random() * 5 + 5; // Random fall duration between 5 and 10 seconds
+      const translateX = Math.random() * 100 - 50; // Random horizontal drift
+
+      snowflake.animate([ 
+          { transform: `translateY(0) translateX(0)`, opacity: 1 },
+          { transform: `translateY(${window.innerHeight}px) translateX(${translateX}px)`, opacity: 0 }
+      ], {
+          duration: fallDuration * 1200,
+          easing: "linear",
+          iterations: Infinity
+      });
+  }
+});
+
+
+// Modal and dropdown functions
+function toggleModal(modalId) {
+  document.getElementById(modalId).classList.toggle('hidden');
+}
+
+function toggleDropdown() {
+  document.getElementById('dropdownMenu').classList.toggle('hidden');
+}
+</script>

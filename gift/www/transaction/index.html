@@ -4,61 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Transaction Logs - CRM Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      id="themeStylesheet"
-      rel="stylesheet"
-      href="home-admin/default-theme.css"
-    />
-    <script src="home-admin/script.js"></script>
   </head>
   <body>
     <div class="flex h-screen">
       <!-- Sidebar -->
-      <aside class="w-64 bg-gray-900 text-gray-200 flex flex-col">
-        <div class="h-16 flex items-center justify-center font-bold text-xl">
-          CRM Dashboard
-        </div>
-        <nav class="flex-1 px-4 py-6">
-          <ul class="space-y-4">
-            <li>
-              <a
-                href="/home-admin/index.html"
-                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
-                >Dashboard</a
-              >
-            </li>
-            <li>
-              <a
-                href="/customers/index.html"
-                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
-                >Customers</a
-              >
-            </li>
-            <li>
-              <a
-                href="/items/index.html"
-                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
-                >Items</a
-              >
-            </li>
-            <li>
-              <a
-                href="/transaction/index.html"
-                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
-                >Transactions Log</a
-              >
-            </li>
-            <li>
-              <a
-                href="/reports/index.html"
-                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
-                >Reports</a
-              >
-            </li>
-          </ul>
-        </nav>
-      </aside>
+      {% include "templates/includes/sidebar.html" %}
 
       <!-- Main Content -->
       <div class="flex-1 flex flex-col">
@@ -68,7 +18,7 @@
         <main class="p-6 bg-gray-100 flex-1">
           <!-- Content for transactions -->
           <div class="bg-white p-6 shadow-lg rounded-lg">
-            <h2 class="text-xl font-semibold mb-4">Transaction List</h2>
+            <h2 class="text-xl font-semibold mb-4">Transaction List</h2>s
             <table class="min-w-full bg-white shadow-lg rounded-lg">
               <thead>
                 <tr>

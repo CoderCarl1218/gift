@@ -98,13 +98,28 @@
     </style>
   </head>
   <body>
+    <div class="flex h-screen">
+    {% include "templates/includes/sidebar.html" %}
+    <div class="flex-1 flex flex-col">
+      <!-- Header -->
+      <header class="py-4 px-6">
+        <div class="flex justify-between items-center">
+          <h1 class="text-2xl font-semibold text-gray-800">Send Template</h1>
+          <div class="flex items-center space-x-4">
+            <button
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg"
+              onclick="toggleModal('addModal')"
+            >
+              Add New
+            </button>
+          </div>
+        </div>
+      </header>
+
     <div class="container">
-      <h1 class="text-3xl font-semibold mb-6">Send Template</h1>
       <form id="templateForm">
         <div class="mb-4">
-          <label for="customerName" class="block text-gray-700"
-            >To: Customer Name</label
-          >
+          <label for="customerName" class="block text-gray-700">To: Customer Name</label>
           <input
             type="text"
             id="customerName"
@@ -122,29 +137,15 @@
           ></textarea>
         </div>
         <div class="mb-4 flex items-center">
-          <label for="backgroundColor" class="block text-gray-700 mr-2"
-            >Background Color</label
-          >
-          <input
-            type="color"
-            id="backgroundColor"
-            class="border border-gray-300 rounded"
-          />
+          <label for="backgroundColor" class="block text-gray-700 mr-2">Background Color</label>
+          <input type="color" id="backgroundColor" class="border border-gray-300 rounded" />
         </div>
         <div class="mb-4 flex items-center">
-          <label for="fontColor" class="block text-gray-700 mr-2"
-            >Font Color</label
-          >
-          <input
-            type="color"
-            id="fontColor"
-            class="border border-gray-300 rounded"
-          />
+          <label for="fontColor" class="block text-gray-700 mr-2">Font Color</label>
+          <input type="color" id="fontColor" class="border border-gray-300 rounded" />
         </div>
         <div class="mb-4">
-          <label for="fontFamily" class="block text-gray-700"
-            >Font Family</label
-          >
+          <label for="fontFamily" class="block text-gray-700">Font Family</label>
           <select
             id="fontFamily"
             class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -157,9 +158,7 @@
           </select>
         </div>
         <div class="mb-4">
-          <label for="backgroundImage" class="block text-gray-700"
-            >Background Image URL</label
-          >
+          <label for="backgroundImage" class="block text-gray-700">Background Image URL</label>
           <input
             type="url"
             id="backgroundImage"
@@ -176,6 +175,9 @@
         </button>
       </form>
     </div>
+    </div>
+    </div>
+
 
     <!-- Modal -->
     <div id="modal" class="modal">
@@ -183,8 +185,7 @@
         <span
           id="closeModal"
           class="close cursor-pointer text-gray-500 float-right text-2xl"
-          >&times;</span
-        >
+        >&times;</span>
         <div id="cardPreview" class="card">
           <div class="card-content">
             <h2 class="text-lg font-bold">
@@ -194,95 +195,71 @@
             <h3 class="mt-6">From: SY3 Corporation</h3>
           </div>
         </div>
-        <button
-          id="sendButton"
-          class="bg-blue-500 text-white px-4 py-2 rounded hidden"
-        >
+        <button id="sendButton" class="bg-blue-500 text-white px-4 py-2 rounded hidden">
           Send Template
         </button>
       </div>
     </div>
 
     <script>
-      document
-        .getElementById("previewButton")
-        .addEventListener("click", function () {
-          const customerName = document.getElementById("customerName").value;
-          const message = document.getElementById("message").value;
-          const backgroundColor =
-            document.getElementById("backgroundColor").value;
-          const fontColor = document.getElementById("fontColor").value;
-          const fontFamily = document.getElementById("fontFamily").value;
-          const backgroundImage =
-            document.getElementById("backgroundImage").value;
+      document.getElementById("previewButton").addEventListener("click", function () {
+        const customerName = document.getElementById("customerName").value;
+        const message = document.getElementById("message").value;
+        const backgroundColor = document.getElementById("backgroundColor").value;
+        const fontColor = document.getElementById("fontColor").value;
+        const fontFamily = document.getElementById("fontFamily").value;
+        const backgroundImage = document.getElementById("backgroundImage").value;
 
-          // Update card preview
-          document.getElementById("previewName").textContent = customerName;
-          document.getElementById("previewMessage").textContent = message;
+        // Update card preview
+        document.getElementById("previewName").textContent = customerName;
+        document.getElementById("previewMessage").textContent = message;
 
-          // Set background color or image
-          const cardPreview = document.getElementById("cardPreview");
-          cardPreview.style.backgroundColor = backgroundColor;
-          if (backgroundImage) {
-            cardPreview.style.backgroundImage = `url(${backgroundImage})`;
-            cardPreview.style.backgroundSize = "cover"; // Cover the entire card
-            cardPreview.style.backgroundPosition = "center"; // Center the image
-          } else {
-            cardPreview.style.backgroundImage = "none"; // No image if not provided
-          }
-
-          // Set font color and family
-          const cardContent = document.querySelector(".card-content");
-          cardContent.style.color = fontColor;
-          cardContent.style.fontFamily = fontFamily;
-
-          cardPreview.style.display = "block"; // Show the card
-
-          // Show modal
-          document.getElementById("modal").style.display = "flex"; // Show the modal
-
-          // Show send button
-          document.getElementById("sendButton").classList.remove("hidden");
-        });
-
-      document
-        .getElementById("sendButton")
-        .addEventListener("click", function () {
-          const customerName = document.getElementById("customerName").value;
-          const message = document.getElementById("message").value;
-          const backgroundColor =
-            document.getElementById("backgroundColor").value;
-          const fontColor = document.getElementById("fontColor").value;
-          const fontFamily = document.getElementById("fontFamily").value;
-          const backgroundImage =
-            document.getElementById("backgroundImage").value;
-
-          // Here you would send the template, e.g. to your server
-          console.log(
-            `Sending to: ${customerName}, Message: ${message}, Background Color: ${backgroundColor}, Font Color: ${fontColor}, Font Family: ${fontFamily}, Background Image: ${backgroundImage}`
-          );
-
-          alert("Template sent successfully!");
-          // Reset the form and hide the modal
-          document.getElementById("templateForm").reset();
-          document.getElementById("cardPreview").style.display = "none";
-          document.getElementById("sendButton").classList.add("hidden");
-          document.getElementById("modal").style.display = "none"; // Hide the modal
-        });
-
-      document
-        .getElementById("closeModal")
-        .addEventListener("click", function () {
-          document.getElementById("modal").style.display = "none"; // Hide the modal
-        });
-
-      // Close the modal if the user clicks outside of it
-      window.onclick = function (event) {
-        const modal = document.getElementById("modal");
-        if (event.target === modal) {
-          modal.style.display = "none"; // Hide the modal
+        // Set background color or image
+        const cardPreview = document.getElementById("cardPreview");
+        cardPreview.style.backgroundColor = backgroundColor;
+        if (backgroundImage) {
+          cardPreview.style.backgroundImage = `url(${backgroundImage})`;
+          cardPreview.style.backgroundSize = "cover"; // Cover the entire card
+          cardPreview.style.backgroundPosition = "center"; // Center the image
+        } else {
+          cardPreview.style.backgroundImage = "none"; // No image if not provided
         }
-      };
+
+        // Set font color and family
+        const cardContent = document.querySelector(".card-content");
+        cardContent.style.color = fontColor;
+        cardContent.style.fontFamily = fontFamily;
+
+        cardPreview.style.display = "block"; // Show the card
+        document.getElementById("modal").style.display = "flex"; // Show the modal
+        document.getElementById("sendButton").classList.remove("hidden"); // Show send button
+      });
+
+      document.getElementById("sendButton").addEventListener("click", function () {
+        const customerName = document.getElementById("customerName").value;
+        const message = document.getElementById("message").value;
+        const backgroundColor = document.getElementById("backgroundColor").value;
+        const fontColor = document.getElementById("fontColor").value;
+        const fontFamily = document.getElementById("fontFamily").value;
+        const backgroundImage = document.getElementById("backgroundImage").value;
+
+        // Here you would send the template, e.g. to your server
+        console.log(
+          `Sending to: ${customerName}, Message: ${message}, Background Color: ${backgroundColor}, Font Color: ${fontColor}, Font Family: ${fontFamily}, Background Image: ${backgroundImage}`
+        );
+
+        alert("Template sent successfully!");
+        // Reset the form and hide the modal
+        document.getElementById("templateForm").reset();
+        document.getElementById("modal").style.display = "none";
+        document.getElementById("cardPreview").style.display = "none";
+      });
+
+      // Close modal
+      document.getElementById("closeModal").addEventListener("click", function () {
+        document.getElementById("modal").style.display = "none";
+        document.getElementById("cardPreview").style.display = "none";
+      });
     </script>
   </body>
 </html>
