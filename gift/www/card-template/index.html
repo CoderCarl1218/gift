@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Send Template</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background-color: #f3f4f6; /* Soft background color */
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #1f2937; /* Darker text color */
+      }
+
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background-color: white;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        border-radius: 10px;
+        width: 500px; /* Increased width */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .card {
+        width: 4in;
+        height: 6in;
+        padding: 20px;
+        margin: 20px auto;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        display: none; /* Hidden initially */
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+
+      label {
+        font-weight: 600; /* Bold labels */
+      }
+
+      button {
+        transition: background-color 0.3s, transform 0.2s;
+      }
+
+      button:hover {
+        background-color: #3b82f6; /* Tailwind's blue-500 */
+        transform: translateY(-2px); /* Lift effect */
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      /* Shorten color input */
+      #backgroundColor,
+      #fontColor {
+        width: 50px; /* Set a fixed width */
+        padding: 0; /* Remove extra padding */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-3xl font-semibold mb-6">Send Template</h1>
+      <form id="templateForm">
+        <div class="mb-4">
+          <label for="customerName" class="block text-gray-700"
+            >To: Customer Name</label
+          >
+          <input
+            type="text"
+            id="customerName"
+            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="message" class="block text-gray-700">Message</label>
+          <textarea
+            id="message"
+            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            rows="4"
+            required
+          ></textarea>
+        </div>
+        <div class="mb-4 flex items-center">
+          <label for="backgroundColor" class="block text-gray-700 mr-2"
+            >Background Color</label
+          >
+          <input
+            type="color"
+            id="backgroundColor"
+            class="border border-gray-300 rounded"
+          />
+        </div>
+        <div class="mb-4 flex items-center">
+          <label for="fontColor" class="block text-gray-700 mr-2"
+            >Font Color</label
+          >
+          <input
+            type="color"
+            id="fontColor"
+            class="border border-gray-300 rounded"
+          />
+        </div>
+        <div class="mb-4">
+          <label for="fontFamily" class="block text-gray-700"
+            >Font Family</label
+          >
+          <select
+            id="fontFamily"
+            class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="Arial">Arial</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Verdana">Verdana</option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <label for="backgroundImage" class="block text-gray-700"
+            >Background Image URL</label
+          >
+          <input
+            type="url"
+            id="backgroundImage"
+            class="w-full p-2 border border-gray-300 rounded"
+            placeholder="Enter image URL"
+          />
+        </div>
+        <button
+          type="button"
+          id="previewButton"
+          class="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          Preview Template
+        </button>
+      </form>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span
+          id="closeModal"
+          class="close cursor-pointer text-gray-500 float-right text-2xl"
+          >&times;</span
+        >
+        <div id="cardPreview" class="card">
+          <div class="card-content">
+            <h2 class="text-lg font-bold">
+              TO: <span id="previewName"></span>
+            </h2>
+            <p id="previewMessage" class="mt-4"></p>
+            <h3 class="mt-6">From: SY3 Corporation</h3>
+          </div>
+        </div>
+        <button
+          id="sendButton"
+          class="bg-blue-500 text-white px-4 py-2 rounded hidden"
+        >
+          Send Template
+        </button>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("previewButton")
+        .addEventListener("click", function () {
+          const customerName = document.getElementById("customerName").value;
+          const message = document.getElementById("message").value;
+          const backgroundColor =
+            document.getElementById("backgroundColor").value;
+          const fontColor = document.getElementById("fontColor").value;
+          const fontFamily = document.getElementById("fontFamily").value;
+          const backgroundImage =
+            document.getElementById("backgroundImage").value;
+
+          // Update card preview
+          document.getElementById("previewName").textContent = customerName;
+          document.getElementById("previewMessage").textContent = message;
+
+          // Set background color or image
+          const cardPreview = document.getElementById("cardPreview");
+          cardPreview.style.backgroundColor = backgroundColor;
+          if (backgroundImage) {
+            cardPreview.style.backgroundImage = `url(${backgroundImage})`;
+            cardPreview.style.backgroundSize = "cover"; // Cover the entire card
+            cardPreview.style.backgroundPosition = "center"; // Center the image
+          } else {
+            cardPreview.style.backgroundImage = "none"; // No image if not provided
+          }
+
+          // Set font color and family
+          const cardContent = document.querySelector(".card-content");
+          cardContent.style.color = fontColor;
+          cardContent.style.fontFamily = fontFamily;
+
+          cardPreview.style.display = "block"; // Show the card
+
+          // Show modal
+          document.getElementById("modal").style.display = "flex"; // Show the modal
+
+          // Show send button
+          document.getElementById("sendButton").classList.remove("hidden");
+        });
+
+      document
+        .getElementById("sendButton")
+        .addEventListener("click", function () {
+          const customerName = document.getElementById("customerName").value;
+          const message = document.getElementById("message").value;
+          const backgroundColor =
+            document.getElementById("backgroundColor").value;
+          const fontColor = document.getElementById("fontColor").value;
+          const fontFamily = document.getElementById("fontFamily").value;
+          const backgroundImage =
+            document.getElementById("backgroundImage").value;
+
+          // Here you would send the template, e.g. to your server
+          console.log(
+            `Sending to: ${customerName}, Message: ${message}, Background Color: ${backgroundColor}, Font Color: ${fontColor}, Font Family: ${fontFamily}, Background Image: ${backgroundImage}`
+          );
+
+          alert("Template sent successfully!");
+          // Reset the form and hide the modal
+          document.getElementById("templateForm").reset();
+          document.getElementById("cardPreview").style.display = "none";
+          document.getElementById("sendButton").classList.add("hidden");
+          document.getElementById("modal").style.display = "none"; // Hide the modal
+        });
+
+      document
+        .getElementById("closeModal")
+        .addEventListener("click", function () {
+          document.getElementById("modal").style.display = "none"; // Hide the modal
+        });
+
+      // Close the modal if the user clicks outside of it
+      window.onclick = function (event) {
+        const modal = document.getElementById("modal");
+        if (event.target === modal) {
+          modal.style.display = "none"; // Hide the modal
+        }
+      };
+    </script>
+  </body>
+</html>

@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CRM Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       id="themeStylesheet"
@@ -12,20 +16,83 @@
     />
     <script src="home-admin/script.js"></script>
     <style>
-      /* Snowflake Styles */
-      .snowflake {
-        position: fixed;
-        top: -10px;
-        color: white;
-        pointer-events: none;
-        opacity: 0.8;
-        animation: fall linear infinite;
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Updated font */
+        background-color: #f7f9fc; /* Light background color */
       }
 
-      @keyframes fall {
-        to {
-          transform: translateY(100vh);
-        }
+      .sidebar {
+        transition: width 0.2s; /* Smooth sidebar transition */
+      }
+
+      header {
+        background-color: #ffffff; /* Header background */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      }
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        padding: 12px 16px; /* More padding for links */
+        border-radius: 8px; /* Rounded corners */
+        transition: background-color 0.3s; /* Smooth hover effect */
+      }
+
+      .nav-link:hover {
+        background-color: rgba(7, 12, 162, 0.1); /* Light hover effect */
+      }
+
+      .card {
+        transition: transform 0.2s; /* Smooth card effect */
+        position: relative; /* For positioning badge */
+      }
+
+      .card:hover {
+        transform: scale(1.02); /* Slight zoom effect on hover */
+      }
+
+      .badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #ff4757; /* Red badge */
+        color: white;
+        padding: 5px 10px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+      }
+
+      table th {
+        background-color: #f1f5f9; /* Light gray for table headers */
+      }
+
+      .table-row {
+        transition: background-color 0.3s; /* Smooth row hover effect */
+      }
+
+      .table-row:hover {
+        background-color: #f9fafb; /* Light hover effect for table rows */
+      }
+
+      button {
+        transition: background-color 0.3s, transform 0.2s; /* Smooth button effect */
+      }
+
+      button:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+        transform: translateY(-2px); /* Lift effect */
+      }
+
+      input,
+      select {
+        border-radius: 4px; /* Rounded input fields */
+        transition: border 0.3s; /* Smooth border effect */
+      }
+
+      input:focus,
+      select:focus {
+        border: 2px solid #007bff; /* Focus border */
+        outline: none; /* Remove default outline */
       }
     </style>
   </head>
@@ -36,57 +103,46 @@
         <div class="h-16 flex items-center justify-center font-bold text-xl">
           CRM Dashboard
         </div>
-
         <nav class="flex-1 px-4 py-6">
           <ul class="space-y-4">
             <li>
-              <a
-                href="#dashboard"
-                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
-              >
-                <!-- <span class="material-icons">dashboard</span> -->
+              <a href="#dashboard" class="nav-link">
+                <i class="fas fa-tachometer-alt"></i>
                 <span class="ml-3">Dashboard</span>
               </a>
             </li>
             <li>
-              <a
-                href="/customers/index.html"
-                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
-              >
-                <!-- <span class="material-icons">people</span> -->
+              <a href="/customers/index.html" class="nav-link">
+                <i class="fas fa-users"></i>
                 <span class="ml-3">Customers</span>
               </a>
             </li>
             <li>
-              <a
-                href="/items/index.html"
-                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
-              >
-                <!-- <span class="material-icons">inventory</span> -->
+              <a href="/items/index.html" class="nav-link">
+                <i class="fas fa-box"></i>
                 <span class="ml-3">Items</span>
               </a>
             </li>
             <li>
-              <a
-                href="/transaction/index.html"
-                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
-              >
-                <!-- <span class="material-icons">receipt_long</span> -->
+              <a href="/transaction/index.html" class="nav-link">
+                <i class="fas fa-receipt"></i>
                 <span class="ml-3">Transactions Log</span>
               </a>
             </li>
             <li>
-              <a
-                href="/reports/index.html"
-                class="flex items-center text-white hover:bg-gray-700 p-3 rounded-lg"
-              >
-                <!-- <span class="material-icons">report</span> -->
+              <a href="/reports/index.html" class="nav-link">
+                <i class="fas fa-chart-line"></i>
                 <span class="ml-3">Reports</span>
+              </a>
+            </li>
+            <li>
+              <a href="/card-template" class="nav-link">
+                <i class="fas fa-envelope"></i>
+                <span class="ml-3">Send Template</span>
               </a>
             </li>
           </ul>
         </nav>
-
         <audio
           id="snowfall-sound"
           src="/files/enchanted-chimes-177906.mp3"
@@ -98,49 +154,16 @@
           class="bg-gray-100 text-gray-600 p-2 rounded-lg"
         >
           <span id="sound-icon">🔊</span>
-          <!-- Default icon for sound on -->
         </button>
       </aside>
 
       <!-- Main Content Area -->
       <div class="flex-1 flex flex-col">
         <!-- Header -->
-        <header class="bg-white shadow py-4 px-6">
+        <header class="py-4 px-6">
           <div class="flex justify-between items-center">
             <h1 class="text-2xl font-semibold text-gray-800">Dashboard</h1>
             <div class="flex items-center space-x-4">
-              <!-- Dropdown for Notifications -->
-              <div class="relative">
-                <button
-                  class="bg-gray-100 text-gray-600 px-4 py-2 rounded-lg"
-                  onclick="toggleDropdown()"
-                >
-                  Notifications
-                </button>
-                <div
-                  id="dropdownMenu"
-                  class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden"
-                >
-                  <ul class="py-1">
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
-                        >Notification 1</a
-                      >
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
-                        >Notification 2</a
-                      >
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <!-- Button to Trigger Add Modal -->
               <button
                 class="bg-blue-500 text-white px-4 py-2 rounded-lg"
                 onclick="toggleModal('addModal')"
@@ -152,28 +175,73 @@
         </header>
 
         <!-- Dashboard Content -->
+        <!-- Dashboard Content -->
         <main class="p-6 bg-gray-100 flex-1">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <!-- Card 1: Total Customers -->
-            <div class="bg-white shadow-lg rounded-lg p-6">
+            <div class="card bg-white shadow-lg rounded-lg p-6">
+              <span class="badge">New</span>
               <h2 class="text-lg font-semibold text-gray-800">
                 Total Customers
               </h2>
               <p class="text-3xl font-bold text-blue-500 mt-4">1,245</p>
+              <i
+                class="fas fa-users fa-2x text-blue-500 absolute bottom-4 right-4"
+              ></i>
             </div>
 
             <!-- Card 2: Total Transactions -->
-            <div class="bg-white shadow-lg rounded-lg p-6">
+            <div class="card bg-white shadow-lg rounded-lg p-6">
+              <span class="badge">Updated</span>
               <h2 class="text-lg font-semibold text-gray-800">
                 Total Transactions
               </h2>
               <p class="text-3xl font-bold text-green-500 mt-4">$34,600</p>
+              <i
+                class="fas fa-receipt fa-2x text-green-500 absolute bottom-4 right-4"
+              ></i>
             </div>
 
             <!-- Card 3: Total Items -->
-            <div class="bg-white shadow-lg rounded-lg p-6">
+            <div class="card bg-white shadow-lg rounded-lg p-6">
               <h2 class="text-lg font-semibold text-gray-800">Total Items</h2>
               <p class="text-3xl font-bold text-red-500 mt-4">789</p>
+              <i
+                class="fas fa-box fa-2x text-red-500 absolute bottom-4 right-4"
+              ></i>
+            </div>
+
+            <!-- Card 4: Customer Satisfaction -->
+            <div class="card bg-white shadow-lg rounded-lg p-6">
+              <h2 class="text-lg font-semibold text-gray-800">
+                Customer Satisfaction
+              </h2>
+              <p class="text-3xl font-bold text-yellow-500 mt-4">92%</p>
+              <i
+                class="fas fa-smile fa-2x text-yellow-500 absolute bottom-4 right-4"
+              ></i>
+            </div>
+
+            <!-- Card 5: Monthly Revenue -->
+            <div class="card bg-white shadow-lg rounded-lg p-6">
+              <h2 class="text-lg font-semibold text-gray-800">
+                Monthly Revenue
+              </h2>
+              <p class="text-3xl font-bold text-purple-500 mt-4">$12,345</p>
+              <i
+                class="fas fa-dollar-sign fa-2x text-purple-500 absolute bottom-4 right-4"
+              ></i>
+            </div>
+
+            <!-- Card 6: Active Promotions -->
+            <div class="card bg-white shadow-lg rounded-lg p-6">
+              <h2 class="text-lg font-semibold text-gray-800">
+                Active Promotions
+              </h2>
+              <p class="text-3xl font-bold text-orange-500 mt-4">5</p>
+              <i
+                class="fas fa-tags fa-2x text-orange-500 absolute bottom-4 right-4"
+              ></i>
             </div>
           </div>
 
@@ -185,55 +253,30 @@
             <table class="min-w-full bg-white shadow-lg rounded-lg">
               <thead>
                 <tr>
-                  <th class="px-4 py-2 text-left text-gray-600">
-                    Customer Name
-                  </th>
-                  <th class="px-4 py-2 text-left text-gray-600">Item</th>
-                  <th class="px-4 py-2 text-left text-gray-600">Date</th>
-                  <th class="px-4 py-2 text-left text-gray-600">Amount</th>
-                  <th class="px-4 py-2 text-left text-gray-600">Actions</th>
+                  <th class="py-2">Date</th>
+                  <th class="py-2">Customer</th>
+                  <th class="py-2">Amount</th>
+                  <th class="py-2">Status</th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="border-t">
-                  <td class="px-4 py-2">John Doe</td>
-                  <td class="px-4 py-2">Gift Card</td>
-                  <td class="px-4 py-2">Sept 19, 2024</td>
-                  <td class="px-4 py-2">$50</td>
-                  <td class="px-4 py-2">
-                    <a
-                      href="#view"
-                      class="text-blue-500 hover:underline"
-                      onclick="toggleModal('viewModal')"
-                      >View</a
-                    >
-                    <a
-                      href="#edit"
-                      class="text-green-500 hover:underline ml-4"
-                      onclick="toggleModal('editModal')"
-                      >Edit</a
-                    >
-                  </td>
+                <tr class="table-row">
+                  <td class="py-2">2024-09-20</td>
+                  <td class="py-2">John Doe</td>
+                  <td class="py-2">$200</td>
+                  <td class="py-2 text-green-500">Completed</td>
                 </tr>
-                <tr class="border-t">
-                  <td class="px-4 py-2">Jane Smith</td>
-                  <td class="px-4 py-2">Custom Mug</td>
-                  <td class="px-4 py-2">Sept 18, 2024</td>
-                  <td class="px-4 py-2">$25</td>
-                  <td class="px-4 py-2">
-                    <a
-                      href="#view"
-                      class="text-blue-500 hover:underline"
-                      onclick="toggleModal('viewModal')"
-                      >View</a
-                    >
-                    <a
-                      href="#edit"
-                      class="text-green-500 hover:underline ml-4"
-                      onclick="toggleModal('editModal')"
-                      >Edit</a
-                    >
-                  </td>
+                <tr class="table-row">
+                  <td class="py-2">2024-09-19</td>
+                  <td class="py-2">Jane Smith</td>
+                  <td class="py-2">$300</td>
+                  <td class="py-2 text-yellow-500">Pending</td>
+                </tr>
+                <tr class="table-row">
+                  <td class="py-2">2024-09-18</td>
+                  <td class="py-2">Mike Johnson</td>
+                  <td class="py-2">$150</td>
+                  <td class="py-2 text-red-500">Failed</td>
                 </tr>
               </tbody>
             </table>
@@ -242,95 +285,41 @@
       </div>
     </div>
 
-    <!-- Modal: Add New Item -->
-    <div
-      id="addModal"
-      class="fixed z-50 inset-0 hidden bg-gray-800 bg-opacity-50 flex items-center justify-center"
-    >
-      <div class="bg-white p-6 rounded-lg w-96">
-        <h3 class="text-lg font-semibold mb-4">Add New Item</h3>
-        <form action="#">
-          <label class="block mb-2">Item Name</label>
-          <input type="text" class="w-full p-2 border rounded mb-4" />
-          <label class="block mb-2">Price</label>
-          <input type="number" class="w-full p-2 border rounded mb-4" />
-          <div class="flex justify-end space-x-4">
-            <button
-              type="button"
-              class="bg-gray-300 px-4 py-2 rounded-lg"
-              onclick="toggleModal('addModal')"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              class="bg-blue-500 text-white px-4 py-2 rounded-lg"
-            >
-              Save
-            </button>
-          </div>
+    <!-- Modal for Adding New Transaction -->
+    <div id="addModal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close" onclick="toggleModal('addModal')">&times;</span>
+        <h2>Add New Transaction</h2>
+        <form>
+          <input type="text" placeholder="Customer Name" required />
+          <input type="text" placeholder="Item" required />
+          <input type="date" required />
+          <input type="number" placeholder="Amount" required />
+          <button type="submit">Add Transaction</button>
         </form>
       </div>
     </div>
 
-    <!-- Modal: View Item Details -->
-    <div
-      id="viewModal"
-      class="fixed z-50 inset-0 hidden bg-gray-800 bg-opacity-50 flex items-center justify-center"
-    >
-      <div class="bg-white p-6 rounded-lg w-96">
-        <h3 class="text-lg font-semibold mb-4">Item Details</h3>
-        <p class="text-gray-700">Name: Gift Card</p>
-        <p class="text-gray-700">Price: $50</p>
-        <p class="text-gray-700">Date: Sept 19, 2024</p>
-        <div class="flex justify-end mt-4">
-          <button
-            class="bg-gray-300 px-4 py-2 rounded-lg"
-            onclick="toggleModal('viewModal')"
-          >
-            Close
-          </button>
-        </div>
-      </div>
-    </div>
+    <script>
+      const soundToggle = document.getElementById("sound-toggle");
+      const soundIcon = document.getElementById("sound-icon");
+      const snowfallSound = document.getElementById("snowfall-sound");
 
-    <!-- Modal: Edit Item -->
-    <div
-      id="editModal"
-      class="fixed z-50 inset-0 hidden bg-gray-800 bg-opacity-50 flex items-center justify-center"
-    >
-      <div class="bg-white p-6 rounded-lg w-96">
-        <h3 class="text-lg font-semibold mb-4">Edit Item</h3>
-        <form action="#">
-          <label class="block mb-2">Item Name</label>
-          <input
-            type="text"
-            class="w-full p-2 border rounded mb-4"
-            value="Gift Card"
-          />
-          <label class="block mb-2">Price</label>
-          <input
-            type="number"
-            class="w-full p-2 border rounded mb-4"
-            value="50"
-          />
-          <div class="flex justify-end space-x-4">
-            <button
-              type="button"
-              class="bg-gray-300 px-4 py-2 rounded-lg"
-              onclick="toggleModal('editModal')"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              class="bg-blue-500 text-white px-4 py-2 rounded-lg"
-            >
-              Update
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+      soundToggle.addEventListener("click", () => {
+        if (snowfallSound.muted) {
+          snowfallSound.muted = false;
+          soundIcon.textContent = "🔊"; // Unmute icon
+        } else {
+          snowfallSound.muted = true;
+          soundIcon.textContent = "🔇"; // Mute icon
+        }
+      });
+
+      // Function to toggle modals
+      function toggleModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.toggle("hidden");
+      }
+    </script>
   </body>
 </html>

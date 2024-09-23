@@ -1,0 +1,215 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-09-22 21:14:40.836057",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "customer_details_section",
+  "customer_code",
+  "firstname",
+  "last_name",
+  "gender",
+  "birthday",
+  "age",
+  "column_break_avzf",
+  "profile",
+  "is_vip",
+  "relationship",
+  "company",
+  "title",
+  "comments",
+  "contact_details_tab",
+  "mobile_number",
+  "landline_number",
+  "email",
+  "address",
+  "province",
+  "city",
+  "street",
+  "zip_code",
+  "personal_details_tab",
+  "size",
+  "secretary_details_tab",
+  "secretary_name",
+  "secretary_mobile_number",
+  "secretary_landline_number",
+  "secretary_email"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer_details_section",
+   "fieldtype": "Section Break",
+   "label": "Customer Details"
+  },
+  {
+   "fieldname": "customer_code",
+   "fieldtype": "Data",
+   "label": "Customer Code"
+  },
+  {
+   "fieldname": "firstname",
+   "fieldtype": "Data",
+   "label": "Firstname"
+  },
+  {
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "label": "Last Name"
+  },
+  {
+   "fieldname": "gender",
+   "fieldtype": "Data",
+   "label": "Gender"
+  },
+  {
+   "fieldname": "birthday",
+   "fieldtype": "Data",
+   "label": "Birthday"
+  },
+  {
+   "fieldname": "age",
+   "fieldtype": "Data",
+   "label": "Age"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Data",
+   "label": "Company"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title"
+  },
+  {
+   "fieldname": "relationship",
+   "fieldtype": "Data",
+   "label": "Relationship"
+  },
+  {
+   "fieldname": "comments",
+   "fieldtype": "Small Text",
+   "label": "Comments"
+  },
+  {
+   "fieldname": "profile",
+   "fieldtype": "Attach",
+   "label": "Profile"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_vip",
+   "fieldtype": "Check",
+   "label": "Is Vip?"
+  },
+  {
+   "fieldname": "contact_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Contact Details"
+  },
+  {
+   "fieldname": "mobile_number",
+   "fieldtype": "Int",
+   "label": "Mobile Number"
+  },
+  {
+   "fieldname": "landline_number",
+   "fieldtype": "Data",
+   "label": "Landline Number"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "fieldname": "personal_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Personal Details"
+  },
+  {
+   "fieldname": "province",
+   "fieldtype": "Data",
+   "label": "Province"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "fieldname": "street",
+   "fieldtype": "Data",
+   "label": "Street"
+  },
+  {
+   "fieldname": "zip_code",
+   "fieldtype": "Data",
+   "label": "Zip Code"
+  },
+  {
+   "fieldname": "secretary_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Secretary Details"
+  },
+  {
+   "fieldname": "secretary_name",
+   "fieldtype": "Data",
+   "label": "Secretary Name"
+  },
+  {
+   "fieldname": "secretary_mobile_number",
+   "fieldtype": "Data",
+   "label": "Secretary Mobile Number"
+  },
+  {
+   "fieldname": "secretary_landline_number",
+   "fieldtype": "Data",
+   "label": "Secretary Landline Number"
+  },
+  {
+   "fieldname": "secretary_email",
+   "fieldtype": "Data",
+   "label": "Secretary Email"
+  },
+  {
+   "fieldname": "size",
+   "fieldtype": "Data",
+   "label": "Size"
+  },
+  {
+   "fieldname": "column_break_avzf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Tab Break",
+   "label": "Address"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-09-22 23:18:29.063799",
+ "modified_by": "Administrator",
+ "module": "CRM System for Gift Management",
+ "name": "Customers",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

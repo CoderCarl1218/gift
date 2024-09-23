@@ -1,0 +1,20 @@
+/* Change the font size of all input fields */
+input {
+  font-size: 16px; /* Adjust as needed */
+}
+
+/* Change the background color of fields */
+input {
+  background-color: #b90909; /* Adjust to your desired color */
+}
+
+/* Change the font color for labels */
+label {
+  color: rgb(7, 12, 162); /* Dark blue */
+  font-size: 20px; /* Adjust as needed */
+}
+
+/* Hide the navbar */
+.navbar {
+  display: none !important; /* Use !important to override other styles */
+}
