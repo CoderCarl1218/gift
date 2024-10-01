@@ -138,13 +138,24 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+## gift/hooks.py
+
+# gift/hooks.py
+
+doctype_js = {
+    "Items": "public/js/items.js"
+}
+
+doc_events = {
+    "Items": {
+        "validate": "gift.api.validate_item_quantity",  # Optional: For server-side validations
+        "after_insert": "gift.api.update_item_summary",
+        "on_update": "gift.api.update_item_summary",
+        "on_cancel": "gift.api.cancel_stock_balance",
+    }
+}
+
+
 
 # Scheduled Tasks
 # ---------------

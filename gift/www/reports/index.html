@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reports - CRM Dashboard</title>
-    <link
-      id="themeStylesheet"
-      rel="stylesheet"
-      href="home-admin/default-theme.css"
-    />
-    
-  </head>
-  <body>
+{%extends "templates/includes/base_layout.html"%}
+{%block title%} CRM Reports {%endblock%}
+
+{%block content%}
     <div class="flex h-screen">
       <!-- Sidebar -->
-      {% include "templates/includes/sidebar.html" %}
+  
 
       <!-- Main Content -->
       <div class="flex-1 flex flex-col">
@@ -56,5 +46,5 @@
         </main>
       </div>
     </div>
-  </body>
+ {%endblock%}
 </html>

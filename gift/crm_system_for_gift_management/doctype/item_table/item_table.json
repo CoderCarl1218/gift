@@ -1,0 +1,74 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-10-01 10:32:07.170810",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "data_column",
+  "item_code",
+  "item_name",
+  "item_type",
+  "item_image",
+  "item_price",
+  "item_quantity"
+ ],
+ "fields": [
+  {
+   "fieldname": "data_column",
+   "fieldtype": "Column Break",
+   "label": "Data"
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item Code",
+   "options": "Items"
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name"
+  },
+  {
+   "fetch_from": "item_code.item_type",
+   "fieldname": "item_type",
+   "fieldtype": "Data",
+   "label": "Item Type"
+  },
+  {
+   "fieldname": "item_image",
+   "fieldtype": "Data",
+   "label": "Item Image"
+  },
+  {
+   "fetch_from": "item_code.item_price",
+   "fieldname": "item_price",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Price"
+  },
+  {
+   "fieldname": "item_quantity",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Quantity"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-10-01 10:39:30.446365",
+ "modified_by": "Administrator",
+ "module": "CRM System for Gift Management",
+ "name": "Item Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
