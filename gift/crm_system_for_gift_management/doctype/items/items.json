@@ -1,11 +1,12 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{item_name}-{item_code}",
+ "autoname": "format:{item_name}-{item_details}",
  "creation": "2024-12-20 15:50:31.259415",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "item_details",
   "item_code",
   "item_name",
   "item_type",
@@ -22,9 +23,9 @@
   {
    "fieldname": "item_code",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Item Code",
-   "read_only": 1,
-   "search_index": 1
+   "read_only": 1
   },
   {
    "fieldname": "item_name",
@@ -87,12 +88,18 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "item_details",
+   "fieldtype": "Data",
+   "label": "Item Code",
+   "search_index": 1
   }
  ],
  "image_field": "item_image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-02 14:42:22.920032",
+ "modified": "2024-10-03 15:24:43.555439",
  "modified_by": "Administrator",
  "module": "CRM System for Gift Management",
  "name": "Items",
@@ -116,5 +123,5 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "item_code"
+ "title_field": "item_details"
 }

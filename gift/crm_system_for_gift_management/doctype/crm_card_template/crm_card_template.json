@@ -22,6 +22,7 @@
   {
    "fieldname": "background_image",
    "fieldtype": "Attach Image",
+   "hidden": 1,
    "label": "Background Image"
   },
   {
@@ -49,7 +50,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-02 13:28:00.164484",
+ "modified": "2024-10-03 15:37:52.577692",
  "modified_by": "Administrator",
  "module": "CRM System for Gift Management",
  "name": "CRM Card Template",

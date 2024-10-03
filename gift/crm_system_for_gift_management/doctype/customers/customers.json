@@ -54,18 +54,24 @@
   {
    "fieldname": "last_name",
    "fieldtype": "Data",
-   "label": "Last Name"
+   "in_list_view": 1,
+   "label": "Last Name",
+   "reqd": 1
   },
   {
    "fieldname": "gender",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Gender",
-   "options": "Male\nFemale"
+   "options": "Male\nFemale",
+   "reqd": 1
   },
   {
    "fieldname": "birthday",
    "fieldtype": "Date",
-   "label": "Birthday"
+   "in_list_view": 1,
+   "label": "Birthday",
+   "reqd": 1
   },
   {
    "fieldname": "age",
@@ -192,18 +198,21 @@
   {
    "fieldname": "full_name",
    "fieldtype": "Data",
-   "label": "Full Name"
+   "label": "Full Name",
+   "read_only": 1
   },
   {
    "fieldname": "first_name",
    "fieldtype": "Data",
-   "label": "First Name"
+   "in_list_view": 1,
+   "label": "First Name",
+   "reqd": 1
   }
  ],
  "image_field": "customer_profile",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-01 16:09:49.223109",
+ "modified": "2024-10-03 15:35:45.688013",
  "modified_by": "Administrator",
  "module": "CRM System for Gift Management",
  "name": "Customers",
