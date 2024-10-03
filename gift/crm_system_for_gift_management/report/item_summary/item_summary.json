@@ -8,17 +8,18 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
+ "json": "{}",
  "letterhead": null,
- "modified": "2024-10-01 11:16:06.287339",
+ "modified": "2024-10-02 13:50:56.397792",
  "modified_by": "Administrator",
  "module": "CRM System for Gift Management",
  "name": "Item Summary",
  "owner": "Administrator",
  "prepared_report": 0,
- "ref_doctype": "Items",
+ "ref_doctype": "Item Summary",
  "reference_report": "Stock Summary",
  "report_name": "Item Summary",
- "report_type": "Custom Report",
+ "report_type": "Report Builder",
  "roles": [
   {
    "role": "System Manager"

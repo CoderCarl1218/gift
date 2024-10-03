@@ -1,10 +1,12 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:company_name",
  "creation": "2024-12-20 15:47:29.377457",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "company_code",
   "company_name",
   "company_type",
   "address",
@@ -13,18 +15,28 @@
   "zip_code",
   "house_no",
   "column_break_cjfv",
+  "company_image",
   "comments"
  ],
  "fields": [
   {
+   "fieldname": "company_code",
+   "fieldtype": "Data",
+   "label": "Company Code",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
    "fieldname": "company_name",
    "fieldtype": "Data",
-   "label": "Company Name"
+   "label": "Company Name",
+   "unique": 1
   },
   {
    "fieldname": "company_type",
    "fieldtype": "Select",
-   "label": "Company Type"
+   "label": "Company Type",
+   "options": "Private\nGovernment"
   },
   {
    "fieldname": "address",
@@ -59,14 +71,21 @@
    "fieldname": "comments",
    "fieldtype": "Small Text",
    "label": "Comments"
+  },
+  {
+   "fieldname": "company_image",
+   "fieldtype": "Attach Image",
+   "label": "Company Image"
   }
  ],
+ "image_field": "company_image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-01 09:42:10.835591",
+ "modified": "2024-10-02 15:08:13.859263",
  "modified_by": "Administrator",
  "module": "CRM System for Gift Management",
  "name": "Company",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {

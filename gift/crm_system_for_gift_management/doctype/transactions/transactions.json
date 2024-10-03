@@ -1,0 +1,120 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-10-01 15:53:27.492031",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_oz0g",
+  "amended_from",
+  "transaction_no",
+  "customer_name",
+  "customer_code",
+  "company_name",
+  "delivery_adress",
+  "column_break_meqq",
+  "transaction_type",
+  "transaction_date",
+  "status",
+  "section_break_gduf",
+  "table_pokr"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_oz0g",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Transactions",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "transaction_no",
+   "fieldtype": "Data",
+   "label": "Transaction No."
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Link",
+   "label": "Customer Name",
+   "options": "Customers"
+  },
+  {
+   "fetch_from": "customer_name.customer_code",
+   "fieldname": "customer_code",
+   "fieldtype": "Data",
+   "label": "Customer Code"
+  },
+  {
+   "fetch_from": "customer_name.company",
+   "fieldname": "company_name",
+   "fieldtype": "Data",
+   "label": "Company Name"
+  },
+  {
+   "fieldname": "delivery_adress",
+   "fieldtype": "Data",
+   "label": "Delivery Adress"
+  },
+  {
+   "fieldname": "column_break_meqq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "transaction_type",
+   "fieldtype": "Link",
+   "label": "Transaction Type",
+   "options": "Transaction Types"
+  },
+  {
+   "fieldname": "transaction_date",
+   "fieldtype": "Datetime",
+   "label": "Transaction Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Pending\nOut For Delivery\nDelivered"
+  },
+  {
+   "fieldname": "section_break_gduf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "table_pokr",
+   "fieldtype": "Table",
+   "options": "Item Table"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-02 13:58:25.803618",
+ "modified_by": "Administrator",
+ "module": "CRM System for Gift Management",
+ "name": "Transactions",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

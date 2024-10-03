@@ -2,6 +2,14 @@
 
 frappe.ui.form.on('Items', {
     refresh: function(frm) {
+            // Check if the item_code is empty (only generate for new records)
+            if (!frm.doc.item_code) {
+                // Generate a random number with 8 digits
+                let random_code = Math.floor(10000000 + Math.random() * 90000000);
+                // Set the item_code with the random number
+                frm.set_value('item_code', random_code.toString());
+            }
+
         // Remove existing custom buttons to prevent duplicates
         frm.page.remove_inner_button(__("Add Quantity"));
         frm.page.remove_inner_button(__("Create Transaction"));
@@ -68,11 +76,12 @@ frappe.ui.form.on('Items', {
         // Add the "Create Transaction" button
         let create_txn_btn = frm.add_custom_button(__('Create Transaction'), function() {
             // Navigate to the Transactions DocType
-            frappe.set_route('List', 'Transaction');
+            frappe.set_route('List', 'Transactions');
         });
 
         // Assign the desired CSS classes to the "Create Transaction" button
         create_txn_btn.addClass('btn btn-primary btn-sm primary-action');
     }
+
     
 });
