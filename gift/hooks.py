@@ -160,23 +160,12 @@ doc_events = {
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"gift.tasks.all"
-# 	],
-# 	"daily": [
-# 		"gift.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"gift.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"gift.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"gift.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+    "daily": [
+        "gift.api.send_birthday_emails"
+    ]
+}
+
 
 # Testing
 # -------

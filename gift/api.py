@@ -1,7 +1,8 @@
-# gift/api.py
-
 import frappe
 from frappe.utils import now
+from frappe.utils import today
+
+
 
 def update_item_summary(doc, method=None):
     """
@@ -94,3 +95,77 @@ def validate_item_quantity(doc, method=None):
     """
     if doc.item_quantity < 0:
         frappe.throw("Item Quantity cannot be negative.")
+import frappe
+from frappe.utils import today
+import logging
+
+logger = logging.getLogger(__name__)
+
+import frappe
+from frappe.utils import today
+import logging
+
+logger = logging.getLogger(__name__)
+
+def send_birthday_emails():
+    """
+    Sends Birthday Template emails with PDF attachments to customers whose birthday is today.
+    """
+    try:
+        today_date = today()  # Format: 'YYYY-MM-DD'
+        today_month = int(today_date[5:7])  # Extract month as integer
+        today_day = int(today_date[8:10])    # Extract day as integer
+
+        logger.info(f"Initiating birthday email process for {today_date}.")
+
+        # SQL query to fetch customers with today's birthday
+        query = """
+            SELECT name, full_name, email, customer_code
+            FROM `tabCustomers`
+            WHERE MONTH(birthday) = %s AND DAY(birthday) = %s
+        """
+        customers = frappe.db.sql(query, (today_month, today_day), as_dict=True)
+
+        logger.info(f"Found {len(customers)} customer(s) with birthdays today.")
+
+        for customer in customers:
+            try:
+                # Validate email
+                if not customer.email:
+                    logger.warning(f"Customer {customer.full_name} does not have an email address. Skipping.")
+                    continue
+
+                # Generate PDF using the "Birthday Template" Print Format
+                pdf = frappe.get_print('Customers', customer.name, 'Test Format', as_pdf=True)
+
+                # Prepare email details
+                email_subject = f"Happy Birthday, {customer.full_name}!"
+                email_template = frappe.get_doc("Email Template", "Birthday Greeting")
+                email_message = frappe.render_template(email_template.message, {"doc": customer})
+
+                # Send Email with PDF Attachment
+                frappe.sendmail(
+                    recipients=[customer.email],
+                    subject=email_subject,
+                    message=email_message,
+                    reference_doctype='Customers',
+                    reference_name=customer.name,
+                    attachments=[{
+                        'fname': f"Happy_Birthday_{customer.full_name}.pdf",
+                        'fcontent': pdf
+                    }]
+                )
+
+                logger.info(f"Birthday email with PDF sent to {customer.full_name} at {customer.email}.")
+
+            except Exception as e:
+                logger.error(f"Failed to send email to {customer.full_name} ({customer.email}): {e}")
+
+    except Exception as e:
+        logger.error(f"Error in send_birthday_emails: {e}")
+        # Optional: Notify administrators about the failure
+        # frappe.sendmail(
+        #     recipients=["admin@example.com"],
+        #     subject="Birthday Email Script Failed",
+        #     message=f"An error occurred while sending birthday emails:\n\n{e}"
+        # )
